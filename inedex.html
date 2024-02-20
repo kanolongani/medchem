@@ -1,39 +1,45 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Streamlit for Geospatial</title>
-    <style type="text/css">
-      html {
-        overflow: auto;
-      }
-      html,
-      body,
-      div,
-      iframe {
-        margin: 0px;
-        padding: 0px;
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    iframe {
+        width: 100%;
         height: 100%;
         border: none;
-      }
-      iframe {
-        display: block;
-        width: 100%;
-        border: none;
-        overflow-y: auto;
-        overflow-x: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    <iframe
-      src="https://share.streamlit.io/giswqs/streamlit-geospatial/app.py"
-      frameborder="0"
-      marginheight="0"
-      marginwidth="0"
-      width="100%"
-      height="100%"
-      scrolling="auto"
-    >
-    </iframe>
-  </body>
+    }
+</style>
+</head>
+<body>
+
+<iframe id="dynamicIframe" src="" frameborder="0"></iframe>
+<div></div>
+<script>
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Get the value of 'url' parameter from URL
+    var urlParam = getUrlParameter('pc_num');
+
+    // Set the source of the iframe to the dynamic URL
+    if (urlParam !== null) {
+        document.getElementById('dynamicIframe').src = "https://aswmedchem.streamlit.app/?embed=true&pc_num="+urlParam;
+    } else {
+        // Provide a default URL if 'url' parameter is not provided
+        document.getElementById('dynamicIframe').src = 'about:blank';
+        alert('No PC number provided.');
+    }
+</script>
+
+</body>
 </html>
